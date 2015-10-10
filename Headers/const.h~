@@ -1,0 +1,24 @@
+#ifndef CONST_H
+
+# define CONST_H
+
+/*WORLD*/
+
+# define SCRW 640.0
+# define SCRH 400.0
+# define C_SIZE 64.0
+
+/*CHARACTER*/
+# define HEIGHT C_SIZE / 2
+# define MOVESPEED 0.1
+# define ROTSPEED 0.06
+
+/*KEYS*/
+
+# define ESC 65307
+# define UP 65362
+# define RIGHT 65363
+# define DOWN 65364
+# define LEFT 65361
+
+#endif

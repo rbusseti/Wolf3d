@@ -1,0 +1,51 @@
+#ifndef WOLF3D_H
+
+# define WOLF3D_H
+
+# include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+# include "world_const.h"
+# include "libft.h"
+# include "mlx.h"
+# include "update.h"
+
+typedef struct	s_table
+{
+    double	cos[360];
+    double	sin[360];
+    double	tan[360];
+}		t_table;
+
+typedef struct	s_cam
+{
+    
+    int		dist;
+    double	next_ray;
+    double	angle;
+    double	posx;
+    double	posy;
+}		t_cam;
+
+typedef struct	s_env
+{
+    void	*mlx;
+    void	*win;
+    void	*img;
+    t_cam	*cam;
+    t_table	*tab;
+    char	**map;
+}		t_env;
+
+int	ft_world_init(t_env *e);
+int	ft_key_hook(int keycode, t_env *e);
+int	ft_loop_hook(t_env *e);
+void	update(t_env *e);
+double	ft_add_angle(double angle1, double angle2);
+void	draw(int wallh, int walltop, int i, t_env *e);
+t_table	*ft_trigo_table(void);
+double	ft_deg_to_rad(double angle);
+
+#endif
