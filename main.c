@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
         map_name = "Ressources/map0.txt";
     else
         map_name = ft_strjoin("Ressources/", argv[1]);
-    ft_putendl(map_name);
     e.mlx = mlx_init();
     e.win = mlx_new_window(e.mlx, SCRW, SCRH, "Wolf3d");
     e.img = mlx_new_image(e.mlx, SCRW, SCRH);

@@ -28,18 +28,30 @@ void    ft_turn_right(t_play *p)
 
 void	ft_move_character(t_env *e)
 {
+    int	    x;
+    int	    y;
+
+    
     if (e->key->left == 1)
 	ft_turn_left(e->p);
     else if (e->key->right == 1)
 	ft_turn_right(e->p);
     if (e->key->up == 1)
     {
-	e->p->posx += e->p->dirx * MOVESPEED;
-        e->p->posy += e->p->diry * MOVESPEED;
+	x = e->p->posx + e->p->dirx * MOVESPEED;
+	y = e->p->posy + e->p->diry * MOVESPEED;
+	if (e->map[x][(int)e->p->posy] == '0')
+	    e->p->posx += e->p->dirx * MOVESPEED;
+	if (e->map[(int)e->p->posx][y] == '0')
+	    e->p->posy += e->p->diry * MOVESPEED;
     }
-    else if (e->key->down == 1)
+    if (e->key->down == 1)
     {
-        e->p->posx -= e->p->dirx * MOVESPEED;
-        e->p->posy -= e->p->diry * MOVESPEED;
+	x = e->p->posx - e->p->dirx * MOVESPEED;
+	y = e->p->posy - e->p->diry * MOVESPEED;
+	if (e->map[x][(int)e->p->posy] == '0')
+	    e->p->posx -= e->p->dirx * MOVESPEED;
+	if (e->map[(int)e->p->posx][y] == '0')
+	    e->p->posy -= e->p->diry * MOVESPEED;
     }
 }

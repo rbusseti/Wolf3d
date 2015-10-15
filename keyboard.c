@@ -4,6 +4,7 @@ int	ft_key_released(int keycode, t_env *e)
 {
     if (keycode == ESC)
     {
+	mlx_destroy_window(e->mlx, e->win);
 	mlx_do_key_autorepeaton(e->mlx);
 	exit(0);
     }

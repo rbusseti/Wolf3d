@@ -39,15 +39,6 @@ t_play	*ft_init_player(int fd)
     return (p);
 }
 
-t_idata *ft_get_img_data(t_env *e)
-{
-    t_idata *idata;
-
-    idata = malloc(sizeof(*idata));
-    idata->adr = mlx_get_data_addr(e->img, &(idata->bpp), &(idata->line), &(idata->edian));
-    return (idata);
-}
-
 t_key	*ft_init_key(void)
 {
     t_key   *key;
@@ -67,7 +58,8 @@ void	ft_init_world(t_env *e, char *map_name)
     fd = open(map_name, O_RDONLY);
     e->map = ft_get_map(fd);
     e->p = ft_init_player(fd);
-    e->idata = ft_get_img_data(e);
+    e->idata = ft_get_img_data(e->img);
     e->key = ft_init_key();
+    e->tex = ft_load_texture(e);
     close(fd);
 }
