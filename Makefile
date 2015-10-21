@@ -2,7 +2,8 @@ NAME = test
 
 SRC = main.c init.c loop_hook.c update.c draw.c keyboard.c \
 	expose_hook.c mouse_hook.c move_character.c texture_loader.c \
-	texture_handler.c
+	texture_handler.c startrek.c print_list.c draw_gun.c shoot.c \
+	overlay.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -9,28 +9,41 @@ t_idata *ft_get_img_data(void *img)
     return (idata);
 }
 
-t_tex	*ft_load_texture(t_env *e)
+t_idata	**ft_load_texture(t_env *e)
 {
     int	    width;
     int	    height;
     void    *texture;
-    t_tex   *tex;
+    t_idata **tex;
 
-    tex = malloc (sizeof(*tex));
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/wall.xpm", &width, &height);
-    tex->wall = ft_get_img_data(texture);
-    free(texture);
+    tex = malloc(sizeof(t_idata*) * 20);
 
     texture = mlx_xpm_file_to_image(e->mlx, "Ressources/floor.xpm", &width, &height);
-    tex->floor = ft_get_img_data(texture);
+    tex[0] = ft_get_img_data(texture);
+    free(texture);
+
+    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/wall.xpm", &width, &height);
+    tex[1] = ft_get_img_data(texture);
     free(texture);
 
     texture = mlx_xpm_file_to_image(e->mlx, "Ressources/ceil.xpm", &width, &height);
-    tex->sky = ft_get_img_data(texture);
+    tex[2] = ft_get_img_data(texture);
     free(texture);
 
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/sword.xpm", &width, &height);
-    tex->sword = ft_get_img_data(texture);
+    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/teleport.xpm", &width, &height);
+    tex[3] = ft_get_img_data(texture);
+    free(texture);
+
+    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/gun.xpm", &width, &height);
+    tex[9] = ft_get_img_data(texture);
+    free(texture);
+
+    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/overlay.xpm", &width, &height);
+    tex[12] = ft_get_img_data(texture);
+    free(texture);
+
+    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/numbers.xpm", &width, &height);
+    tex[13] = ft_get_img_data(texture);
+    
     return (tex);
 }

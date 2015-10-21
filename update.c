@@ -2,8 +2,6 @@
 
 void	ft_init_ray(t_ray *ray, t_env *e)
 {
-    ray->posx = e->p->posx;
-    ray->posy = e->p->posy;
     ray->dirx = e->p->dirx + e->p->planex * e->camx;
     ray->diry = e->p->diry + e->p->planey * e->camx;
     ray->nextx = sqrt(1 + (ray->diry * ray->diry) / (ray->dirx * ray->dirx));
@@ -26,7 +24,7 @@ int	ft_next_intersect(t_ray *ray, t_env *e)
 	ray->mapy = ray->mapy + ray->stepy;
 	ray->side = 1;
     }
-    if (e->map[ray->mapx][ray->mapy] != '0')
+    if (e->map[ray->mapx][ray->mapy] != '0' && e->map[ray->mapx][ray->mapy] != '3')
 	return (1);
     return (0);
 }
@@ -59,19 +57,17 @@ void	ft_find_intersect(t_ray *ray, t_env *e)
 
 void	ft_calc_wall(t_ray *ray, t_env *e, int i)
 {
-    t_draw  pen;
-
-    pen.wallh = abs((int)(SCRH / ray->truedist));
-    pen.walltop = -(pen.wallh) / 2 + SCRH / 2;
-    if (pen.walltop < 0)
-	pen.walltop = 0;
-    pen.wallbot = (int)(pen.wallh / 2 + SCRH / 2);
-    if (pen.wallbot >= SCRH)
-	pen.wallbot = SCRH - 1;
-    pen.side = ray->side;
-    pen.dirx = ray->dirx;
-    pen.diry = ray->diry;
-    ft_draw(pen, i, e, ray);
+    ray->wallh = abs((int)(SCRH / ray->truedist));
+    ray->walltop = -(ray->wallh) / 2 + SCRH / 2;
+    if (ray->walltop < 0)
+	ray->walltop = 0;
+    ray->wallbot = (int)(ray->wallh / 2 + SCRH / 2);
+    if (ray->wallbot >= SCRH)
+	ray->wallbot = SCRH - 1;
+    ray->side = ray->side;
+    ray->dirx = ray->dirx;
+    ray->diry = ray->diry;
+    ft_draw(i, e, ray);
 }
 
 void	ft_update(t_env *e)
@@ -80,18 +76,23 @@ void	ft_update(t_env *e)
     t_ray   ray;
 
     i = 0;
+    ray.posx = e->p->posx;
+    ray.posy = e->p->posy;
     while (i < SCRW)
     {
 	e->camx = 2 * i / (double)SCRW - 1;
 	ft_init_ray(&ray, e);
 	ft_find_intersect(&ray, e);
 	if (ray.side == 0)
-	    ray.truedist = fabs(((double)ray.mapx - ray.posx + (1 - ray.stepx) / 2) / ray.dirx);
+	    ray.truedist = fabs(((double)ray.mapx - ray.posx + (1 - ray.stepx)\
+				 / 2) / ray.dirx);
 	else
-	    ray.truedist = fabs(((double)ray.mapy - ray.posy + (1 - ray.stepy) / 2) / ray.diry);
+	    ray.truedist = fabs(((double)ray.mapy - ray.posy + (1 - ray.stepy)\
+				 / 2) / ray.diry);
 	ft_calc_wall(&ray, e, i);
 	i++;
     }
+    ft_draw_overlay(e);
     mlx_clear_window(e->mlx, e->win);
     mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 }

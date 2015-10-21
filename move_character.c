@@ -40,18 +40,18 @@ void	ft_move_character(t_env *e)
     {
 	x = e->p->posx + e->p->dirx * MOVESPEED;
 	y = e->p->posy + e->p->diry * MOVESPEED;
-	if (e->map[x][(int)e->p->posy] == '0')
+	if (e->map[x][(int)e->p->posy] == '0' || e->map[x][(int)e->p->posy] == '3')
 	    e->p->posx += e->p->dirx * MOVESPEED;
-	if (e->map[(int)e->p->posx][y] == '0')
+	if (e->map[(int)e->p->posx][y] == '0' || e->map[(int)e->p->posx][y] == '3')
 	    e->p->posy += e->p->diry * MOVESPEED;
     }
-    if (e->key->down == 1)
+    else if (e->key->down == 1)
     {
 	x = e->p->posx - e->p->dirx * MOVESPEED;
 	y = e->p->posy - e->p->diry * MOVESPEED;
-	if (e->map[x][(int)e->p->posy] == '0')
+	if (e->map[x][(int)e->p->posy] == '0' || e->map[x][(int)e->p->posy] == '3')
 	    e->p->posx -= e->p->dirx * MOVESPEED;
-	if (e->map[(int)e->p->posx][y] == '0')
+	if (e->map[(int)e->p->posx][y] == '0' || e->map[(int)e->p->posx][y] == '3')
 	    e->p->posy -= e->p->diry * MOVESPEED;
     }
 }

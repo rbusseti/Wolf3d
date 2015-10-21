@@ -6,12 +6,18 @@
 
 # define SCRW 640.0
 # define SCRH 400.0
+# define GUNX 400
 # define C_SIZE 64.0
+# define FOG 3
+# define AMMO_X 124
+# define AMMO_Y SCRH + 20
+# define LIFE_X 437
+# define LIFE_Y SCRH + 20
 
 /*CHARACTER*/
 # define HEIGHT C_SIZE / 2
-# define MOVESPEED 0.1
-# define ROTSPEED 0.03
+# define MOVESPEED 0.18
+# define ROTSPEED 0.08
 
 /*KEYS*/
 
@@ -20,5 +26,6 @@
 # define RIGHT 65363
 # define DOWN 65364
 # define LEFT 65361
+# define SPACE 32
 
 #endif
