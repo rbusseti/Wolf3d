@@ -6,6 +6,7 @@ int	ft_loop_hook(t_env *e)
     ft_move_character(e);
     ft_shoot(e);
     ft_teleport(e);
+    ft_pickup(e);
     e->frame++;
     if (e->t1 == 0)
 	time(&(e->t1));
@@ -14,7 +15,7 @@ int	ft_loop_hook(t_env *e)
 	time(&(e->t2));
 	if (e->t2 - e->t1 >= 1)
 	{
-	    printf("%d\n", e->frame);
+//	    printf("%d\n", e->frame);
 	    e->frame = 0;
 	    e->t1 = e->t2;
 	}

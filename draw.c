@@ -63,6 +63,4 @@ void    ft_draw(int i, t_env *e, t_ray *ray)
 	ft_pixel_put_to_image(icolor, e->idata, i, SCRH - j);
         j++;
     }
-    if (i > GUNX - e->gun->gap && i < GUNX)
-	ft_draw_gun(i, e);
 }

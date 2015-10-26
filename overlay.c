@@ -12,7 +12,7 @@ void	ft_draw_numbers(int x, int y, t_env *e, int n)
     {
 	while (j < 40)
 	{
-	    icolor = ft_get_color(i, j + n * 40, e->tex[13], 0);
+	    icolor = ft_get_color(i, j + n * 40, e->tex[6], 0);
 	    if (icolor != 0)
 		ft_pixel_put_to_image(icolor, e->idata, j + x, i + y);
 	    j++;
@@ -47,7 +47,7 @@ void	ft_draw_overlay(t_env *e)
     {
 	while (j < SCRW)
 	{
-	    icolor = ft_get_color(i - SCRH, j, e->tex[12], 0);
+	    icolor = ft_get_color(i - SCRH, j, e->tex[5], 0);
 	    ft_pixel_put_to_image(icolor, e->idata, j, i);
 	    j++;
 	}

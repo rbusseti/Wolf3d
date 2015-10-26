@@ -9,41 +9,48 @@ t_idata *ft_get_img_data(void *img)
     return (idata);
 }
 
+char	**ft_get_texture_name(t_env *e)
+{
+    char    *line;
+    char    **tex_name;
+    int	    fd;
+    int	    i;
+
+    line = NULL;
+    fd = open(ft_strjoin(e->path, "init_tex.txt"), O_RDONLY);
+    i = 0;
+    get_next_line(fd, &line);
+    e->nb_tex = ft_atoi(line);
+    tex_name = malloc(sizeof(char *) * e->nb_tex);
+    while (i < e->nb_tex)
+    {
+	get_next_line(fd, &line);
+	tex_name[i] = ft_strdup(line);
+	i++;
+    }
+    tex_name[i] = NULL;
+    close(fd);
+    return (tex_name);
+}
+
 t_idata	**ft_load_texture(t_env *e)
 {
-    int	    width;
-    int	    height;
+    int	    w;
+    int	    h;
+    int	    i;
     void    *texture;
     t_idata **tex;
 
-    tex = malloc(sizeof(t_idata*) * 20);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/floor.xpm", &width, &height);
-    tex[0] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/wall.xpm", &width, &height);
-    tex[1] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/ceil.xpm", &width, &height);
-    tex[2] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/teleport.xpm", &width, &height);
-    tex[3] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/gun.xpm", &width, &height);
-    tex[9] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/overlay.xpm", &width, &height);
-    tex[12] = ft_get_img_data(texture);
-    free(texture);
-
-    texture = mlx_xpm_file_to_image(e->mlx, "Ressources/numbers.xpm", &width, &height);
-    tex[13] = ft_get_img_data(texture);
-    
+    e->tex_name = ft_get_texture_name(e);
+    tex = malloc(sizeof(t_idata*) * e->nb_tex);
+    i = 0;
+    while (i < e->nb_tex)
+    {
+	texture = mlx_xpm_file_to_image\
+	    (e->mlx, ft_strjoin(e->path, e->tex_name[i]), &w, &h);
+	tex[i] = ft_get_img_data(texture);
+	free(texture);
+	i++;
+    }
     return (tex);
 }

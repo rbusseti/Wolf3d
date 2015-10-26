@@ -90,8 +90,11 @@ void	ft_update(t_env *e)
 	    ray.truedist = fabs(((double)ray.mapy - ray.posy + (1 - ray.stepy)\
 				 / 2) / ray.diry);
 	ft_calc_wall(&ray, e, i);
+	e->sdist[i] = ray.truedist;
 	i++;
     }
+    ft_calc_sprites(e);
+    ft_draw_gun(e);
     ft_draw_overlay(e);
     mlx_clear_window(e->mlx, e->win);
     mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);

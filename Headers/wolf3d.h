@@ -89,6 +89,35 @@ typedef struct	s_gun
     int		ammo;
 }		t_gun;
 
+typedef struct	s_sprite
+{
+    double     	posx;
+    double     	posy;
+    int		id;
+    int		base_id;
+    int		num_id;
+    double	dist;
+    int		life;
+}		t_sprite;
+
+typedef struct	s_calcsp
+{
+    double	posx;
+    double	posy;
+    double	transx;
+    double	transy;
+    double	inv;
+    int		height;
+    int		top;
+    int		bot;
+    int		width;
+    int		left;
+    int		right;
+    int		lsave;
+    int		rsave;
+    int		screenx;
+}		t_calcsp;
+
 typedef struct	s_env
 {
     void	*mlx;
@@ -100,11 +129,17 @@ typedef struct	s_env
     t_gun	*gun;
     t_idata	**tex;
     char	**map;
+    char	**tex_name;
+    char	*path;
     t_list	*tp;
     double	camx;
     time_t	t1;
     time_t	t2;
     int		frame;
+    double	*sdist;
+    t_sprite	**sprite;
+    int		nb_sprites;
+    int		nb_tex;
 }		t_env;
 
 typedef struct	s_floor
@@ -134,8 +169,11 @@ unsigned long	ft_get_color(int x, int y, t_idata *img, double truedist);
 void		ft_pixel_put_to_image(unsigned long color, t_idata *idata, int y, int x);
 void		ft_teleport(t_env *e);
 void		ft_print_list(t_list **list);
-void		ft_draw_gun(int i, t_env *e);
+void		ft_draw_gun(t_env *e);
 void		ft_shoot(t_env *e);
 void		ft_draw_overlay(t_env *e);
+void		ft_calc_sprites(t_env *e);
+void		ft_comb_sort(t_sprite **sprite, int size);
+void		ft_pickup(t_env *e);
 
 #endif

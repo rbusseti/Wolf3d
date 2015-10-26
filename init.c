@@ -99,9 +99,38 @@ t_gun	*ft_init_gun(void)
     gun->split[4] = 387;
     gun->split[5] = 501;
     gun->count = 0;
-    gun->texnum = 9;
+    gun->texnum = 4;
     gun->ammo = 10;
     return (gun);
+}
+
+t_sprite    **ft_init_sprites(int fd, t_env *e)
+{
+    t_sprite	**sprites;
+    char	*line;
+    char	**split;
+    int		i;
+
+    i = 0;
+    line = NULL;
+    get_next_line(fd, &line);
+    sprites = malloc(sizeof(*sprites) * ft_atoi(line));
+    e->nb_sprites = ft_atoi(line);
+    get_next_line(fd, &line);
+    while (ft_strcmp(line, "end") != 0)
+    {
+	split = ft_strsplit(line, ' ');
+	sprites[i] = malloc(sizeof(**sprites));
+	sprites[i]->posx = ft_atoi(split[0]) + 0.5;
+	sprites[i]->posy = ft_atoi(split[1]) + 0.5;
+	sprites[i]->id = ft_atoi(split[2]);
+	sprites[i]->life = ft_atoi(split[3]);
+	sprites[i]->base_id = sprites[i]->id;
+	sprites[i]->num_id = ft_atoi(split[4]);
+	i++;
+	get_next_line(fd, &line);
+    }
+    return (sprites);
 }
 
 void	ft_init_world(t_env *e, char *map_name)
@@ -113,11 +142,15 @@ void	ft_init_world(t_env *e, char *map_name)
     e->p = ft_init_player(fd);    
     e->idata = ft_get_img_data(e->img);
     e->key = ft_init_key();
-    e->tex = ft_load_texture(e);
     e->gun = ft_init_gun();
+    e->path = "Ressources/";
     ft_init_teleport(fd, e);
+    e->sprite = ft_init_sprites(fd, e);
     close(fd);
+    e->tex = ft_load_texture(e);
     e->t1 = 0;
     e->t2 = 0;
     e->frame = 0;
+    e->sdist = malloc(sizeof(double) * SCRW);
 }
+

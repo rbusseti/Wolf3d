@@ -6,7 +6,8 @@
 
 # define SCRW 640.0
 # define SCRH 400.0
-# define GUNX 400
+# define HALFW SCRW / 2
+# define GUNX SCRW / 2 + 44
 # define C_SIZE 64.0
 # define FOG 3
 # define AMMO_X 124
