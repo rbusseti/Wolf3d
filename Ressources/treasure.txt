@@ -1,0 +1,7 @@
+treasure
+visible 1
+shootable 0
+pickable 1
+life 0
+id 12
+frame 0

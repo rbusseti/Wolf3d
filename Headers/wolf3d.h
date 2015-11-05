@@ -91,13 +91,17 @@ typedef struct	s_gun
 
 typedef struct	s_sprite
 {
-    double     	posx;
-    double     	posy;
+    double	posx;
+    double	posy;
+    double	dist;
+    char	vis;
+    char	shoot;
+    char	pick;
+    char	*name;
+    int		life;
     int		id;
     int		base_id;
-    int		num_id;
-    double	dist;
-    int		life;
+    int		frame;
 }		t_sprite;
 
 typedef struct	s_calcsp
@@ -175,5 +179,5 @@ void		ft_draw_overlay(t_env *e);
 void		ft_calc_sprites(t_env *e);
 void		ft_comb_sort(t_sprite **sprite, int size);
 void		ft_pickup(t_env *e);
-
+t_sprite	**ft_init_sprites(int fd, t_env *e);
 #endif

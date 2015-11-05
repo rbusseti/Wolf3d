@@ -104,42 +104,13 @@ t_gun	*ft_init_gun(void)
     return (gun);
 }
 
-t_sprite    **ft_init_sprites(int fd, t_env *e)
-{
-    t_sprite	**sprites;
-    char	*line;
-    char	**split;
-    int		i;
-
-    i = 0;
-    line = NULL;
-    get_next_line(fd, &line);
-    sprites = malloc(sizeof(*sprites) * ft_atoi(line));
-    e->nb_sprites = ft_atoi(line);
-    get_next_line(fd, &line);
-    while (ft_strcmp(line, "end") != 0)
-    {
-	split = ft_strsplit(line, ' ');
-	sprites[i] = malloc(sizeof(**sprites));
-	sprites[i]->posx = ft_atoi(split[0]) + 0.5;
-	sprites[i]->posy = ft_atoi(split[1]) + 0.5;
-	sprites[i]->id = ft_atoi(split[2]);
-	sprites[i]->life = ft_atoi(split[3]);
-	sprites[i]->base_id = sprites[i]->id;
-	sprites[i]->num_id = ft_atoi(split[4]);
-	i++;
-	get_next_line(fd, &line);
-    }
-    return (sprites);
-}
-
 void	ft_init_world(t_env *e, char *map_name)
 {
     int	    fd;
 
     fd = open(map_name, O_RDONLY);
     e->map = ft_get_map(fd);
-    e->p = ft_init_player(fd);    
+    e->p = ft_init_player(fd);
     e->idata = ft_get_img_data(e->img);
     e->key = ft_init_key();
     e->gun = ft_init_gun();
@@ -153,4 +124,3 @@ void	ft_init_world(t_env *e, char *map_name)
     e->frame = 0;
     e->sdist = malloc(sizeof(double) * SCRW);
 }
-

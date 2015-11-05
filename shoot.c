@@ -34,7 +34,7 @@ int    ft_calc_impact(t_env *e, t_calcsp csp, int c_sprite)
 	{
 	    e->sprite[c_sprite]->life--;
 	    if (e->sprite[c_sprite]->id < e->sprite[c_sprite]->base_id \
-		+ e->sprite[c_sprite]->num_id)
+		+ e->sprite[c_sprite]->frame)
 		e->sprite[c_sprite]->id++;
 	    return (1);
 	}

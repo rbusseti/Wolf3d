@@ -51,8 +51,8 @@ tp
 5
 end
 4
-11 3 8 3 3
-9 3 8 3 3
-8 4 8 3 3
-22 25 12 0 0
+triso 11 3
+triso 9 3
+triso 8 4
+treasure 22 25
 end

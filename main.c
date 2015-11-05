@@ -25,8 +25,9 @@ int	main(int argc, char **argv)
     e.win = mlx_new_window(e.mlx, SCRW, SCRH + 80, "Wolf3d");
     e.img = mlx_new_image(e.mlx, SCRW, SCRH + 80);
     mlx_do_key_autorepeatoff(e.mlx);
+    ft_putendl("avant init");
     ft_init_world(&e, map_name);
-
+    ft_putendl("apres init");
     ft_putnbr(e.gun->split[0]);
     ft_putchar('\n');
     ft_putnbr(e.gun->split[1]);

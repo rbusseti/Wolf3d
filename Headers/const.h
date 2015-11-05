@@ -17,8 +17,8 @@
 
 /*CHARACTER*/
 # define HEIGHT C_SIZE / 2
-# define MOVESPEED 0.18
-# define ROTSPEED 0.08
+# define MOVESPEED 0.27
+# define ROTSPEED 0.1
 
 /*KEYS*/
 
