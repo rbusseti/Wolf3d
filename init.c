@@ -32,6 +32,8 @@ t_play	*ft_init_player(int fd)
     p->posx = ft_atoi(line);
     get_next_line(fd, &line);
     p->posy = ft_atoi(line);
+    p->basex = p->posx;
+    p->basey = p->posy;
     p->dirx = -1;
     p->diry = 0;
     p->planex = 0;

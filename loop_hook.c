@@ -4,6 +4,12 @@
 int	ft_loop_hook(t_env *e)
 {
     ft_move_character(e);
+    ft_move_enemy(e);
+    if (e->p->life < 1)
+    {
+	ft_restart_level(e);
+	return (0);
+    }
     ft_shoot(e);
     ft_teleport(e);
     ft_pickup(e);

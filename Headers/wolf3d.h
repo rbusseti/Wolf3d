@@ -14,6 +14,8 @@
 
 typedef struct	s_play
 {
+    double	basex;
+    double	basey;
     double	posx;
     double	posy;
     double	dirx;
@@ -93,10 +95,13 @@ typedef struct	s_sprite
 {
     double	posx;
     double	posy;
+    double	savex;
+    double	savey;
     double	dist;
     char	vis;
     char	shoot;
     char	pick;
+    char	move;
     char	*name;
     int		life;
     int		id;
@@ -144,6 +149,7 @@ typedef struct	s_env
     t_sprite	**sprite;
     int		nb_sprites;
     int		nb_tex;
+    char	restart;
 }		t_env;
 
 typedef struct	s_floor
@@ -180,4 +186,6 @@ void		ft_calc_sprites(t_env *e);
 void		ft_comb_sort(t_sprite **sprite, int size);
 void		ft_pickup(t_env *e);
 t_sprite	**ft_init_sprites(int fd, t_env *e);
+void		ft_move_enemy(t_env *e);
+void		ft_restart_level(t_env *e);
 #endif

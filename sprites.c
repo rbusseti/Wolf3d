@@ -76,6 +76,10 @@ void	ft_calc_sprites(t_env *e)
 			      * (e->p->posx - e->sprite[i]->posx)\
 			      + (e->p->posy - e->sprite[i]->posy)\
 			      * (e->p->posy - e->sprite[i]->posy));
+	if (e->sprite[i]->dist < 100 && e->sprite[i]->pick == 0)
+	    e->sprite[i]->move = 1;
+	else
+	    e->sprite[i]->move = 0;
 	i++;
     }
     ft_comb_sort(e->sprite, e->nb_sprites - 1);
