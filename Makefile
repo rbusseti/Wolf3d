@@ -4,7 +4,7 @@ SRC = main.c init.c loop_hook.c update.c draw.c keyboard.c \
 	expose_hook.c mouse_hook.c move_character.c texture_loader.c \
 	texture_handler.c startrek.c print_list.c draw_gun.c shoot.c \
 	overlay.c sprites.c comb_sort.c pickup.c init_sprites.c \
-	move_enemy.c restart_level.c
+	move_enemy.c restart_level.c check_box.c
 
 OBJ = $(SRC:.c=.o)
 

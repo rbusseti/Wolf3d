@@ -26,15 +26,14 @@ void    ft_turn_right(t_play *p)
     p->planey = oldplanex * sin(-ROTSPEED) + p->planey * cos(-ROTSPEED);
 }
 
-int	ft_check_sprites_col(int x, int y, t_env *e)
+int	ft_check_sprites_col(double x, double y, t_env *e)
 {
     int	    i;
 
     i = 0;
     while (i < e->nb_sprites)
     {
-	if ((int)e->sprite[i]->posx == (int)x && \
-	    (int)e->sprite[i]->posy == (int)y && \
+	if (ft_check_box(e->sprite[i]->posx, e->sprite[i]->posy, x, y) && \
 	    e->sprite[i]->life != 0 && e->sprite[i]->pick != 1)
 	    return (0);
 	i++;

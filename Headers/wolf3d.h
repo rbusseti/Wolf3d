@@ -12,6 +12,14 @@
 # include "mlx.h"
 # include "const.h"
 
+typedef struct	s_box
+{
+    double	north;
+    double	south;
+    double	east;
+    double	west;
+}		t_box;
+
 typedef struct	s_play
 {
     double	basex;
@@ -188,4 +196,6 @@ void		ft_pickup(t_env *e);
 t_sprite	**ft_init_sprites(int fd, t_env *e);
 void		ft_move_enemy(t_env *e);
 void		ft_restart_level(t_env *e);
+int		ft_check_box(double x1, double y1, double x2, double y2);
+
 #endif

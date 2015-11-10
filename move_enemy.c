@@ -1,8 +1,8 @@
 #include "wolf3d.h"
 
-int	ft_check_hero(int x, int y, t_env *e)
+int	ft_check_hero(double x, double y, t_env *e)
 {
-    if ((int)e->p->posx == x && (int)e->p->posy == y)
+    if (ft_check_box(e->p->posx, e->p->posy, x, y))
     {
 	e->p->life--;
 	return (0);
@@ -10,7 +10,7 @@ int	ft_check_hero(int x, int y, t_env *e)
     return (1);
 }
 
-int	ft_check_sprites(int x, int y, t_env *e, int j)
+int	ft_check_sprites(double x, double y, t_env *e, int j)
 {
     int	    i;
 
@@ -19,7 +19,7 @@ int	ft_check_sprites(int x, int y, t_env *e, int j)
     {
 	if (i != j && e->sprite[i]->life > 0)
 	{
-	    if ((int)e->sprite[i]->posx == x && (int)e->sprite[i]->posy == y)
+	    if (ft_check_box(e->sprite[i]->posx, e->sprite[i]->posy, x, y))
 		return (0);
 	}
 	i++;
@@ -29,15 +29,15 @@ int	ft_check_sprites(int x, int y, t_env *e, int j)
 
 void	ft_is_move_blocked(double dirx, double diry, t_env *e, int i)
 {
-    int	    x;
-    int	    y;
+    double  x;
+    double  y;
 
     x = e->sprite[i]->posx + dirx * MOVESPEED / 4;
     y = e->sprite[i]->posy + diry * MOVESPEED / 4;
-    if (e->map[x][(int)e->sprite[i]->posy] == '0' && \
+    if (e->map[(int)x][(int)e->sprite[i]->posy] == '0' &&		\
 	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
 	e->sprite[i]->posx += dirx * MOVESPEED / 4;
-    if (e->map[(int)e->sprite[i]->posx][y] == '0' && \
+    if (e->map[(int)e->sprite[i]->posx][(int)y] == '0' &&		\
 	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
 	e->sprite[i]->posy += diry * MOVESPEED / 4;
 }
