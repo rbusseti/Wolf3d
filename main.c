@@ -18,9 +18,9 @@ int	main(int argc, char **argv)
     char    *map_name;
 
     if (argc != 2)
-        map_name = "Ressources/map0.txt";
+        map_name = "map0.txt";
     else
-        map_name = ft_strjoin("Ressources/", argv[1]);
+        map_name = argv[1];
     e.mlx = mlx_init();
     e.win = mlx_new_window(e.mlx, SCRW, SCRH + 80, "Wolf3d");
     e.img = mlx_new_image(e.mlx, SCRW, SCRH + 80);

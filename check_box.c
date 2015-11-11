@@ -4,10 +4,10 @@ t_box	ft_init_box(double x, double y)
 {
     t_box   box;
 
-    box.north = y - 0.5;
-    box.south = y + 0.5;
-    box.east = x + 0.5;
-    box.west = x - 0.5;
+    box.north = y - 0.45;
+    box.south = y + 0.45;
+    box.east = x + 0.45;
+    box.west = x - 0.45;
     return (box);
 }
 

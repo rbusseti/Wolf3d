@@ -193,7 +193,7 @@ void		ft_draw_overlay(t_env *e);
 void		ft_calc_sprites(t_env *e);
 void		ft_comb_sort(t_sprite **sprite, int size);
 void		ft_pickup(t_env *e);
-t_sprite	**ft_init_sprites(int fd, t_env *e);
+t_sprite	**ft_init_sprites(char *map_name, t_env *e);
 void		ft_move_enemy(t_env *e);
 void		ft_restart_level(t_env *e);
 int		ft_check_box(double x1, double y1, double x2, double y2);

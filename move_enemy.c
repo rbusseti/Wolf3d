@@ -34,10 +34,37 @@ void	ft_is_move_blocked(double dirx, double diry, t_env *e, int i)
 
     x = e->sprite[i]->posx + dirx * MOVESPEED / 4;
     y = e->sprite[i]->posy + diry * MOVESPEED / 4;
-    if (e->map[(int)x][(int)e->sprite[i]->posy] == '0' &&		\
+    if (dirx != 0 && e->map[(int)x][(int)e->sprite[i]->posy] == '0' &&		\
 	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
 	e->sprite[i]->posx += dirx * MOVESPEED / 4;
-    if (e->map[(int)e->sprite[i]->posx][(int)y] == '0' &&		\
+    if (diry != 0 && e->map[(int)e->sprite[i]->posx][(int)y] == '0' &&		\
+	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
+	e->sprite[i]->posy += diry * MOVESPEED / 4;
+}
+
+void	ft_is_move_hor(double dirx, double diry, t_env *e, int i)
+{
+    double  x;
+    double  y;
+
+    x = e->sprite[i]->posx + dirx * MOVESPEED / 4;
+    y = e->sprite[i]->posy + diry * MOVESPEED / 4;
+    if (dirx != 0 && e->map[(int)x][(int)e->sprite[i]->posy] == '0' &&		\
+	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
+	e->sprite[i]->posx += dirx * MOVESPEED / 4;
+}
+
+void	ft_is_move_ver(double dirx, double diry, t_env *e, int i)
+{
+    double  x;
+    double  y;
+
+    x = e->sprite[i]->posx + dirx * MOVESPEED / 4;
+    y = e->sprite[i]->posy + diry * MOVESPEED / 4;
+    if (dirx != 0 && e->map[(int)x][(int)e->sprite[i]->posy] == '0' &&		\
+	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
+	e->sprite[i]->posx += dirx * MOVESPEED / 4;
+    if (diry != 0 && e->map[(int)e->sprite[i]->posx][(int)y] == '0' &&		\
 	ft_check_sprites(x, y, e, i) && ft_check_hero(x, y, e))
 	e->sprite[i]->posy += diry * MOVESPEED / 4;
 }
@@ -53,17 +80,36 @@ void	ft_calc_dir(t_env *e, int i)
     diry = e->p->posy - e->sprite[i]->posy;
     absx = fabs(dirx);
     absy = fabs(diry);
-    if (absx > absy  && absx > 1)
+    if (absx > absy - 0.1 && absx < absy + 0.1)
     {
-	diry = diry / absx;
-	dirx = dirx / absx;
+	if (dirx > 0)
+	    dirx = 0.5;
+	else
+	    dirx = -0.5;
+	if (diry > 0)
+	    diry = 0.5;
+	else
+	    diry = -0.5;
+	ft_is_move_blocked(dirx, diry, e, i);
     }
-    else if (absy > 1)
+    else if (absx > absy)
     {
-	    dirx = dirx / absy;
-	    diry = diry / absy;
+	if (dirx > 0)
+	    dirx = 1;
+	else
+	    dirx = -1;
+	diry = 0;
+	ft_is_move_hor(dirx, diry, e, i);
     }
-    ft_is_move_blocked(dirx, diry, e, i);
+    else
+    {
+	if (diry > 0)
+	    diry = 1;
+	else
+	    diry = -1;
+	dirx = 0;
+	ft_is_move_ver(dirx, diry, e, i);
+    }
 }
 
 void	ft_move_enemy(t_env *e)

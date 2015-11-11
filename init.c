@@ -110,15 +110,15 @@ void	ft_init_world(t_env *e, char *map_name)
 {
     int	    fd;
 
-    fd = open(map_name, O_RDONLY);
+    e->path = "Ressources/";
+    fd = open(ft_strjoin(e->path, map_name), O_RDONLY);
     e->map = ft_get_map(fd);
     e->p = ft_init_player(fd);
     e->idata = ft_get_img_data(e->img);
     e->key = ft_init_key();
     e->gun = ft_init_gun();
-    e->path = "Ressources/";
     ft_init_teleport(fd, e);
-    e->sprite = ft_init_sprites(fd, e);
+    e->sprite = ft_init_sprites(ft_strjoin("sprite", map_name), e);
     close(fd);
     e->tex = ft_load_texture(e);
     e->t1 = 0;

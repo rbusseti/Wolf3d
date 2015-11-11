@@ -15,7 +15,8 @@ void    ft_draw_gun(t_env *e)
 	while (j < SCRH)
 	{
 	    
-	    icolor = ft_get_color(j - SCRH + 150, i - (GUNX - e->gun->gap) + e->gun->split[frame], e->tex[e->gun->texnum], 0);
+	    icolor = ft_get_color(j - SCRH + 150, i - (GUNX - e->gun->gap)\
+                     + e->gun->split[frame], e->tex[e->gun->texnum], 0);
 	    if (icolor != 0)
 		ft_pixel_put_to_image(icolor, e->idata, i, j);
 	    j++;

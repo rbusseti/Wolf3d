@@ -26,31 +26,53 @@ void	    ft_get_sprite_info(t_sprite *sprite, char *file)
     close(fd);
 }
 
-t_sprite    **ft_init_sprites(int fd, t_env *e)
+int    ft_get_sprites(t_sprite **sprites, char *line, int i, int x)
+{
+    int	    y;
+
+    y = 0;
+    while (line[y] != '\0')
+    {
+	if (line[y] == '4')
+	{
+	    sprites[i] = malloc(sizeof(**sprites));
+	    sprites[i]->posx = x + 0.5;
+	    sprites[i]->posy = y + 0.5;
+	    sprites[i]->savex = sprites[i]->posx;
+	    sprites[i]->savey = sprites[i]->posy;
+	    ft_get_sprite_info(sprites[i], "Ressources/triso");
+	    i = i + 1;
+	    ft_putnbr(i);
+	    ft_putchar('\n');
+	}
+	y++;
+    }
+    return (i);
+}
+
+t_sprite    **ft_init_sprites(char *map_name, t_env *e)
 {
     t_sprite	**sprites;
     char	*line;
-    char	**split;
+    int		fd;
     int		i;
+    int		x;
 
     i = 0;
+    x = 0;
     line = NULL;
-    split = NULL;
+    fd = open(ft_strjoin(e->path, map_name), O_RDONLY);
+    ft_putendl("avant get");
     get_next_line(fd, &line);
+    ft_putendl("apres get");
     e->nb_sprites = ft_atoi(line);
     sprites = malloc(sizeof(*sprites) * e->nb_sprites);
-    get_next_line(fd, &line);
-    while (ft_strcmp(line, "end") != 0)
+    ft_putendl("apres malloc");
+    while (get_next_line(fd, &line))
     {
-	sprites[i] = malloc(sizeof(**sprites));
-	split = ft_strsplit(line, ' ');
-	sprites[i]->posx = ft_atoi(split[1]) + 0.5;
-	sprites[i]->posy = ft_atoi(split[2]) + 0.5;
-	sprites[i]->savex = sprites[i]->posx;
-	sprites[i]->savey = sprites[i]->posy;
-	ft_get_sprite_info(sprites[i], ft_strjoin(e->path, split[0]));
-	get_next_line(fd, &line);
-	i++;
+	i = ft_get_sprites(sprites, line, i, x);
+	x++;
     }
+    close(fd);
     return (sprites);
 }
